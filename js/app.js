@@ -1,11 +1,11 @@
 (function(){
 
-angular
+	angular
 	.module('ttcApp',[]);
 
 
 
-})();
+})(); 
 
 
 //player clicks on container, adds x or y
@@ -16,3 +16,5 @@ angular
 
 
 ///
+
+//models connected to the grid

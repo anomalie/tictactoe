@@ -1,8 +1,10 @@
-body{ background-color: #ecf0f1
+body{ background-color: black;
+ color: white;
+ opacity: 20%
+
 }
 
 
-.h1{font-weight: italic}
 
 .gamegrid{ position: relative;
   padding: 5%;
@@ -11,6 +13,8 @@ body{ background-color: #ecf0f1
   border-collapse: 1px;
   margin: auto;
   text-align: center;
+  background-color: #7f8c8d;
+  border-radius: 15%;
 
 }
 
@@ -24,11 +28,13 @@ body{ background-color: #ecf0f1
   background: url('../img/soundwave2.jpg');
 
   background-position: center;
-  background-size: 110px;
-  border-radius: 65%;
+  background-size: 135px;
+  border-radius: 50%;
 
   overflow: hidden;
   cursor: pointer;
+  border: purple;
+  border-width: 1px;
 }
 
 .container .circles{
@@ -41,9 +47,9 @@ body{ background-color: #ecf0f1
   right: 0;
   bottom: 0;
   left: 0;
-  border-radius: 65%;
+  border-radius: 50%;
 
-  opacity: 0;
+  opacity: 20%;
   transition: .7s ease;
   transition: .7s ease;
 
@@ -52,7 +58,9 @@ body{ background-color: #ecf0f1
 }
 
 .container:hover .circles{
-  opacity: 1;
+  opacity: 100;
   width: 100%;
   height: 100%;
+
+
 }

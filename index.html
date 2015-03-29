@@ -6,47 +6,31 @@
 
 		<link rel="stylesheet" href="css/normalize.css">
 		<link rel="stylesheet" href="css/style.css">
-        <script src="js/angular.min.js"></script>
-        <script src="js/mainController.js"></script>
-		<script type="js/app.js"></script>
+      
 
 	</head>
 
 
 
-	<body>
+	<body ng-controller="mainController as main">
+{{7+2}}
+
 	<div class = "gamegrid">
-		<div class="container">
- 			<div class="circles"></div>
- 		</div>
-     	<div class="container">
- 			<div class="circles"></div>
-     	</div>
-     	<div class="container">
- 			<div class="circles"></div>
-     	</div>
-     	<div class="container">
-     			<div class="circles"></div>
-         	</div>
-     	<div class="container">
-     			<div class="circles"></div>
-         	</div>
-     	<div class="container">
-     			<div class="circles"></div>
-         	</div>
-     	<div class="container">
-     			<div class="circles"></div>
-         	</div>
-        <div class="container">
-     			<div class="circles"></div>
-         	</div>
-        <div class="container">
-     			<div class="circles"></div>
-         	</div>
+		<div class="container" ng-repeat="circle in main.Array">
+ 			<div class="circles">
+
+
+
+            <span id="sq1">1  </span>
+            </div>
+        </div>
+  
       
 
     <h1 class="header">Tic-Tac-Toe</h1>
     </div>
+
+
 
 
  
@@ -58,6 +42,11 @@
 	</div>
 
 
+
+<!-- source JS -->
+  <script src="js/angular.min.js"></script>
+        <script src="js/MainController.js"></script>
+        <script type="js/app.js"></script>
 
 	</body>
 
