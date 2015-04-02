@@ -1,23 +1,80 @@
-body{ background-color: black;
+body{
+background: black;
+background-image: url('../img/colorwallpaper.jpg');
  color: white;
- opacity: 20%
+ background-size: 100%;
+ background-repeat: no-repeat;
+ font-size: 4em;
+ font-style: bold;
+ text-align: center;
 
 }
 
+button{
+  height: 30px;
+  width: 100px;
+  font-size: 15px;
+  border: 0px;
+  color: yellow;
+  background-color: yellow;
+  opacity: 50%;
+  margin-top: 10px;
+}
 
+#header {
+  font-family: monospace;
+  text-align: center;
+  color: yellow;
+
+}
+
+.animationgrid{
+  position: relative;
+  margin: 0 auto;
+  width: 500px;
+  height:500px;
+
+  animation-name: animations;
+  animation-duration: 3s;
+  animation-delay: .5s;
+  animation-iteration-count: 1;
+  -webkit-animation-name: animations;
+  -webkit-animation-delay: .5s;
+  -webkit-animation-duration: 3s;
+  -webkit-animation-iteration-count: 1;
+}
+
+@-webkit-keyframes animations{
+    0%{background-color: transparent;
+       position: absolute;
+      border-radius: 1%;
+      width: 500px;
+      height:500px;
+      transform: rotateZ(360deg);
+      }
+
+    100%{background-color: transparent;
+      position: absolute;
+      width: 500px;
+      height:500px;
+      }
+
+
+}
 
 .gamegrid{ position: relative;
+  margin-top: 10px;
   padding: 5%;
   width: 500px;
   height: 500px;
-  border-collapse: 1px;
-  margin: auto;
+  margin: 0 auto;
   text-align: center;
-  background-color: #7f8c8d;
-  border-radius: 15%;
+  color: yellow;
+  opacity: 50%;
+
+
 
 }
-
 
 .container{
   display: inline-block;
@@ -26,34 +83,35 @@ body{ background-color: black;
   width: 150px;
   height: 150px;
   background: url('../img/soundwave2.jpg');
-
+  color: yellow;
+  opacity: 50%;
   background-position: center;
   background-size: 135px;
-  border-radius: 50%;
 
+  border-radius: 50%;
   overflow: hidden;
   cursor: pointer;
-  border: purple;
-  border-width: 1px;
+  border-width: 20px;
+  text-align: center;
+
 }
 
-.container .circles{
+ .circles{
   background: rgba(0,0,0,.5);
   position: absolute;
   margin: auto;
   width: 0px;
   height: 0px;
   top: 0;
-  right: 0;
-  bottom: 0;
+  right: 47;
+  bottom: 50;
   left: 0;
   border-radius: 50%;
-
+  color: yellow;
+  text-align: center;
   opacity: 20%;
-  transition: .7s ease;
-  transition: .7s ease;
-
-
+  transition: .8s ease;
+  transition: .8s ease;
 
 }
 
@@ -61,6 +119,38 @@ body{ background-color: black;
   opacity: 100;
   width: 100%;
   height: 100%;
+  text-align: center;
+  color: green;
+  float:right;
 
 
 }
+
+.endGame {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  opacity: .70;
+  text-align: center;
+  padding-top: 20%;
+  color: yellow;
+  font-size: 50px;
+  z-index: 1;
+}
+
+#playAgain {
+  background-color: transparent;
+  border: 1px solid yellow;
+}
+
+#Reset {
+  margin-top: 30px;
+  background: transparent;
+  border: 1px solid yellow;
+  opacity: .7;
+
+
+
+}
+

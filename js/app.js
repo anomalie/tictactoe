@@ -1,20 +1,8 @@
 (function(){
 
 	angular
-	.module('ttcApp',[]);
+	.module('ttcApp',['firebase']);
 
 
+})();
 
-})(); 
-
-
-//player clicks on container, adds x or y
-
-//3 rows win,
-//3 columns win,
-//corner middle corner,
-
-
-///
-
-//models connected to the grid

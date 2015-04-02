@@ -1,79 +1,114 @@
 (function (){
-
 	angular
-		.module('ttcApp', [])
+		.module('ttcApp', ['firebase'])
 		.controller('mainController', mainController);
 
-//set functions 
-		function mainController(){
+	mainController.$inject = ['$scope', '$firebaseObject', '$firebaseArray'];
+
+				//SET CONTROLLER FUNCTION & VARIABLES//
+		function mainController($scope, $firebaseObject, $firebaseArray){
 			var self = this;
-			self.setBackgroundColor = setBackgroundColor;
-			self.playerOne =[{name:""}];
-			self.playerTwo =[{name:""}];
-			self.Array = [
-				{circle: 1},
-				{circle: 2},
-				{circle: 3},
-				{circle: 4},
-				{circle: 5},
-				{circle: 6},
-				{circle: 7},
-				{circle: 8},
-				{circle: 9}
+			var ref= new Firebase("https://tictactoefbapp.firebaseio.com/");
+				self.playerMove = playerMove;
+				self.currentPlayer = 0 ;
+				self.selectPlayer = selectTurn();
+				self.switchTurn = switchTurn;
+				self.getWinner= getWinner;
+				self.newGame = newGame;
+				self.Winner = 0;
+				self.spaces = 9;
+				self.board = [
+				{circle: null }, {circle: null }, {circle: null },
+				{circle: null }, {circle: null }, {circle: null },
+				{circle: null }, {circle: null }, {circle: null }
 				];
+				// RESETS TO NEW GAME //
+				function newGame() {
+					self.currentPlayer = 1;
+					self.Winner = 0;
+					self.spaces = 9;
+					self.board = [
+					{circle: null }, {circle: null }, {circle: null },
+					{circle: null }, {circle: null }, {circle: null },
+					{circle: null }, {circle: null }, {circle: null }
+					];
 
-			self.winner = function(array) {
+					}
+				// SELECT TURN FUNCTION //
+				function selectTurn(){
+					self.currentPlayer = Math.ceil(Math.random() * 2);
+					}
+				// PLAYER MOVE FUNCTION//
+				function playerMove(index) {
+					  if (self.board[index].circle === null) {
 
-			if ( 
+									  if (self.currentPlayer === 1) {
+											self.board[index].circle = "X";
+											self.spaces--;
+											self.getWinner();
+											self.switchTurn();
 
-				 array[0] == 'X' && array[1] == 'X' && array[2] == 'X' ||
-			     array[3] == 'X' && array[4] == 'X' && array[5] == 'X' ||
-			     array[6] == 'X' && array[7] == 'X' && array[8] == 'X' ||
-			     array[0] == 'X' && array[4] == 'X' && array[8] == 'X' ||
-			     array[2] == 'X' && array[4] == 'X' && array[6] == 'X' ||
-			     array[0] == 'X' && array[3] == 'X' && array[6] == 'X' ||
-			     array[1] == 'X' && array[4] == 'X' && array[7] == 'X' ||
-			     array[2] == 'X' && array[5] == 'X' && array[8] == 'X'
-			 	
-				 ){
-			
-				return true;
-			} else if (
 
-				 array[0] == 'O' && array[1] == 'O' && array[2] == 'O' ||
-			     array[3] == 'O' && array[4] == 'O' && array[5] == 'O' ||
-			     array[6] == 'O' && array[7] == 'O' && array[8] == 'O' ||
-			     array[0] == 'O' && array[4] == 'O' && array[8] == 'O' ||
-			     array[2] == 'O' && array[4] == 'O' && array[6] == 'O' ||
-			     array[0] == 'O' && array[3] == 'O' && array[6] == 'O' ||
-			     array[1] == 'O' && array[4] == 'O' && array[7] == 'O' ||
-			     array[2] == 'O' && array[5] == 'O' && array[8] == 'O'
+									} else if (self.currentPlayer === 2) {
+											self.board[index].circle = "O";
+											self.spaces--;
+											self.getWinner();
+											self.switchTurn();
+									}
+						}
+				}
+				// SWITCHES TURNS FOR PLAYERS //
+				function switchTurn(){
+						if (self.currentPlayer === 1) {
+								self.currentPlayer = 2;
 
-				) {
-			
-				return true;
-			} else {
-				return false;	
+						}
+						else if (self.currentPlayer === 2){
+								self.currentPlayer = 1;
+						}
+				}
+				// GAME LOGIC- DETERMINES GAME WINNER AND TIE //
+					function getWinner() {
+
+						if (
+
+						self.board[0].circle == 'X' && self.board[1].circle == 'X' && self.board[2].circle == 'X' ||
+				    self.board[3].circle == 'X' && self.board[4].circle == 'X' && self.board[5].circle == 'X' ||
+				    self.board[6].circle == 'X' && self.board[7].circle == 'X' && self.board[8].circle == 'X' ||
+				    self.board[0].circle == 'X' && self.board[4].circle == 'X' && self.board[8].circle == 'X' ||
+				    self.board[2].circle == 'X' && self.board[4].circle == 'X' && self.board[6].circle == 'X' ||
+			      self.board[0].circle == 'X' && self.board[3].circle == 'X' && self.board[6].circle == 'X' ||
+			   		self.board[1].circle == 'X' && self.board[4].circle == 'X' && self.board[7].circle == 'X' ||
+			      self.board[2].circle == 'X' && self.board[5].circle == 'X' && self.board[8].circle == 'X'
+
+					 ){
+
+						self.Winner = "1 Wins";
+						console.log(self.Winner);
+
+					} else if (
+
+				 	 self.board[0].circle == 'O' && self.board[1].circle == 'O' && self.board[2].circle == 'O' ||
+			     self.board[3].circle == 'O' && self.board[4].circle == 'O' && self.board[5].circle == 'O' ||
+			     self.board[6].circle == 'O' && self.board[7].circle == 'O' && self.board[8].circle == 'O' ||
+			     self.board[0].circle == 'O' && self.board[4].circle == 'O' && self.board[8].circle == 'O' ||
+			     self.board[2].circle == 'O' && self.board[4].circle == 'O' && self.board[6].circle == 'O' ||
+			     self.board[0].circle == 'O' && self.board[3].circle == 'O' && self.board[6].circle == 'O' ||
+			     self.board[1].circle == 'O' && self.board[4].circle == 'O' && self.board[7].circle == 'O' ||
+			     self.board[2].circle == 'O' && self.board[5].circle == 'O' && self.board[8].circle == 'O'
+
+					) {
+					self.Winner = "2 Wins";
+					console.log(self.Winner);
+
+				}
+				else if (self.spaces === 0)
+					{self.Winner= "Tie";
+					console.log(self.Winner);
+
+				}
 			}
 		}
-		}
-// After 'X' or 'O' is pushed into array
-// need function to look at same index position, and set style according to if it's an
-// X or O
-
-		function setBackgroundColor(){
-			var self = this
-			self.style.background = "yellow";
-
-
-		}
-
-		//ng repeat
-		//ng-models within the square 
-
-
-// function resets game
-
 
 })();
 

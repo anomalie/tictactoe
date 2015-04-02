@@ -1,0 +1,9 @@
+{
+  "firebase": "tictactoefbapp",
+  "public": ".",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}
