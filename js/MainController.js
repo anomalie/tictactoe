@@ -1,30 +1,23 @@
 (function (){
 	angular
-		.module('ttcApp',[])
+		.module('ttcApp',['firebase'])
 		.controller('mainController', mainController);
 
-	// mainController.$inject = ['$scope', '$firebaseObject', '$firebaseArray'];
+	mainController.$inject = ['$firebaseObject'];
 
 				//SET CONTROLLER FUNCTION & VARIABLES//
-		function mainController(){
-			// var ref= new Firebase("https://tictactoefbapp.firebaseio.com/");
+		function mainController($firebaseObject){
 
 			var winSound = new Audio ("./audio/ending.mp3");
 			var resetSound = new Audio ("./audio/Reset.mp3");
 			var sounds = [
-			  "./audio/ttc_01.mp3",
-			  "./audio/ttc_02.mp3",
-				"./audio/ttc_03.mp3",
-				"./audio/ttc_04.mp3",
-				"./audio/ttc_05.mp3",
-				"./audio/ttc_06.mp3",
-				"./audio/ttc_07.mp3",
-				"./audio/ttc_08.mp3",
-				"./audio/ttc_09.mp3",
-				"./audio/ttc_10.mp3",
-				"./audio/ttc_11.mp3"
+			  "./audio/ttc_01.mp3","./audio/ttc_02.mp3","./audio/ttc_03.mp3",
+				"./audio/ttc_04.mp3","./audio/ttc_05.mp3","./audio/ttc_06.mp3",
+				"./audio/ttc_07.mp3","./audio/ttc_08.mp3","./audio/ttc_09.mp3",
+				"./audio/ttc_10.mp3","./audio/ttc_11.mp3"
 			];
-
+			// var ref= new Firebase("https://tictactoefbapp.firebaseio.com/");
+			// var game=$firebaseObject(ref);
 
 			var self = this;
 				self.playerMove = playerMove;
@@ -32,10 +25,11 @@
 				self.selectPlayer = selectTurn();
 				self.switchTurn = switchTurn;
 				self.getWinner= getWinner;
-
 				self.newGame = newGame;
 				self.Winner = 0;
 				self.spaces = 9;
+				self.playerOnePoints = 0;
+				self.playerTwoPoints = 0;
 				self.board = [
 				{circle: null }, {circle: null }, {circle: null },
 				{circle: null }, {circle: null }, {circle: null },
@@ -60,11 +54,10 @@
 					self.currentPlayer = Math.ceil(Math.random() * 2);
 
 					}
-				// PLAYER MOVE FUNCTION//
+				// PLAYER MOVE FUNCTION //
 				function playerMove(index) {
-
 					  if (self.board[index].circle === null) {
-					  				// RANDOM SOUNDS PLAYS DURING PLAYERMOVE//
+					  				// RANDOM SOUNDS PLAYS DURING PLAYERMOVE //
 					  				var randomSound=Math.floor(Math.random()*sounds.length);
 					  				var newSounds= new Audio(sounds[randomSound]);
 					  					newSounds.play();
@@ -74,24 +67,19 @@
 											self.getWinner();
 											self.switchTurn();
 
-
-
 									} else if (self.currentPlayer === 2) {
 											self.board[index].circle = "O";
 											self.spaces--;
 											self.getWinner();
 											self.switchTurn();
-
 									}
 						}
-
 
 				}
 				// SWITCHES TURNS FOR PLAYERS //
 				function switchTurn(){
 						if (self.currentPlayer === 1) {
 								self.currentPlayer = 2;
-
 
 						}
 						else if (self.currentPlayer === 2){
@@ -118,7 +106,9 @@
 					 ){
 
 						self.Winner = "1";
+						self.playerOnePoints++;
 						console.log(self.Winner);
+						console.log(self.playerOnePoints);
 						winSound.play();
 
 					} else if (
@@ -134,6 +124,9 @@
 
 					) {
 					self.Winner = "2";
+					self.playerTwoPoints++;
+					console.log(self.Winner);
+					console.log(self.playerTwoPoints);
 					winSound.play();
 
 
@@ -142,11 +135,11 @@
 					{self.Winner= "Tie";
 					console.log(self.Winner);
 					winSound.play();
-
-
+					self.playerOnePoints = self.playerOnePoints;
+					self.playerTwoPoints = self.playerTwoPoints;
 				}
-			}
 
+			}
 
 		}
 

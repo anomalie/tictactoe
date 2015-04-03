@@ -6,13 +6,14 @@
 		<!-- CSS Style -->
 		<link rel="stylesheet" href="css/normalize.css">
 		<link rel="stylesheet" href="css/style.css">
-
-
- 		<!-- JS -->
-
-    <!-- Angular -->
+        <!-- Angular -->
     <script src="js/angular.min.js"></script>
-    <script type="js/app.js"></script>
+     <!-- Firebase -->
+    <script src="js/firebase.js"></script>
+    <!-- AngularFire -->
+    <script src="js/angularfire.js"></script>
+
+<!--     <script type="js/app.js"></script> -->
     <script src="js/MainController.js"></script>
 
 
@@ -22,15 +23,15 @@
 
   <!-- Hidden Game Results Page -->
 
-      <div ng-show= "main.Winner === '1'" class= "gameEnd"> Player One Wins <br/>
-          <button ng-click= "main.newGame()" id= "playAgain">Play Again?</button></div>
-      <div ng-if= "main.Winner === '2'" class= "gameEnd"> Player Two Wins <br/>
-          <button ng-click= "main.newGame()"id= "playAgain">Play Again?</button></div>
-      <div ng-show= "main.spaces === 0" class= "tieGameEnd"> Tie Game <br/>
-          <button ng-click= "main.newGame()" id= "playAgain">Play Again?</button></div>
-
+    <div ng-show= "main.Winner === '1'" class= "gameEnd"> PLAYER ONE WINS<br/>
+        <button ng-click= "main.newGame()" id= "playAgain">PLAY AGAIN?</button></div>
+    <div ng-if= "main.Winner === '2'" class= "gameEnd"> PLAYER TWO WINS <br/>
+        <button ng-click= "main.newGame()"id= "playAgain">PLAY AGAIN?</button></div>
+    <div ng-if= "main.spaces === 0" class= "tieGameEnd"> TIE GAME <br/>
+        <button ng-click= "main.newGame()" id= "playAgain">PLAY AGAIN?</button></div>
 
   <!-- Main Game Grid  -->
+
     <div class= "animationgrid">
       <div class = "gamegrid">
   		  <div class="container" ng-repeat="circle in main.board track by $index">
@@ -42,23 +43,16 @@
 
         </div>
     </div>
+
+    <div id="header">  TIC -TAC -TOE</div>
     <div class="button">
-      <button ng-click = "main.newGame()" id= "Reset">Reset Game</button></div>
-      <div id="header">Tic-Tac-Toe</div>
-
-
+      <button ng-click = "main.newGame()" id= "Reset"> RESET GAME</button></div>
+    <div class="lowerthird">
+      <div id= "playerOnePoints" > PLAYER ONE : {{main.playerOnePoints}}    </div>
+      <div id= "playerTwoPoints"> PLAYER TWO: {{main.playerTwoPoints}}    </div>
     </div>
 
 
-
-
-
-
-
-
-
-	</div>
-	</div>
 
 
 

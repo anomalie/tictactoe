@@ -4,36 +4,39 @@ body{
  color: yellow;
  background-size: 100%;
  background-repeat: no-repeat;
- font-family: monospace;
+ font-family: neonLights;
  font-size: 6em;
  font-style: bold;
  text-align: center;
 }
 button{
   height: 30px;
-  width: 100px;
+  width: 110px;
   font-size: 15px;
   border: 0px;
   color: yellow;
-  background-color: yellow;
-  opacity: 50%;
+  opacity: .40;
   margin-top: 10px;
-  padding: 2px;
+  padding: 3px;
 }
+ @font-face {
+    font-family: neonLights;
+    src: url(../fonts/NEON_LIGHTS.woff)}
+
+
 #header {
-/*  @font-face {
-    font-family: NEON_LIGHTS;
-    src:url('../fonts/NEON_LIGHTS.ttf');*/
-  font-size: 25px;
+  font-family: neonLights;
+  font-size: 40px;
   text-align: center;
   color: yellow;
-  margin-top: 20px;
+  margin-top: 40px;
 }
 
 .animationgrid{
   display: inline=block;
   position: relative;
-  margin-top: 60%;
+  margin-top: 80px;
+
   margin: 0 auto;
   width: 490px;
   height:450px;
@@ -101,6 +104,7 @@ button{
   -webkit-animation-delay: .2s;
   -webkit-animation-duration: 2s;
   -webkit-animation-iteration-count: 2;
+
 }
 
 @-webkit-keyframes circlespin{
@@ -130,24 +134,25 @@ button{
   width: 0px;
   height: 0px;
   top: 0;
-  right: 47;
-  bottom: 68;
+  right: 70;
+  bottom: 96;
   left: 0;
   border-radius: 50%;
   color: yellow;
   text-align: center;
-  opacity: 20%;
+  text-decoration: bold;
+  opacity: .80;
+
   transition: .8s ease;
   transition: .8s ease;
 
 }
 
 .container:hover .circles{
-  opacity: 100;
+  opacity: 0;
   width: 100%;
   height: 100%;
   text-align: center;
-  color: limegreen;
   float:right;
 
 }
@@ -171,7 +176,7 @@ button{
   height: 100%;
   width: 100%;
   background-color: black;
-  opacity: .70;
+  opacity: .80;
   text-align: center;
   padding-top: 20%;
   color: yellow;
@@ -180,7 +185,7 @@ button{
 }
 
 #playAgain {
-  margin-top:20px;
+  margin-top:50px;
   background-color: transparent;
   border: 1px solid yellow;
 }
@@ -190,6 +195,27 @@ button{
   background: transparent;
   border: 1px solid yellow;
   opacity: .7;
+
+}
+
+.lowerthird{
+  display: inline-block;
+  font-size: 20px;
+  height: 300px;
+  width: 720px;
+  margin: top;
+  margin: 0 auto;
+
+}
+#playerOnePoints{
+  float: left;
+   opacity: .90;
+}
+
+#playerTwoPoints{
+
+float: right;
+opacity: .90;
 
 }
 
