@@ -6,28 +6,29 @@
 		<!-- CSS Style -->
 		<link rel="stylesheet" href="css/normalize.css">
 		<link rel="stylesheet" href="css/style.css">
+
+
  		<!-- JS -->
-    <script type="js/app.js"></script>
+
     <!-- Angular -->
- 		<script src="js/angular.min.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script type="js/app.js"></script>
     <script src="js/MainController.js"></script>
-		<!-- Firebase -->
-    <script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
-		<!-- Angular Fire -->
-    <script src="js/angularfire.js"></script>
+
 
 	</head>
 
 	<body ng-controller="mainController as main">
 
-
   <!-- Hidden Game Results Page -->
-      <div ng-show= "main.Winner === '1'" class= "endGame"> Player One Wins <br/>
-          <button ng-click= "main.newGame()" id= "playAgain">Play Again</button></div>
-      <div ng-show= "main.Winner === '2'" class= "endGame"> Player Two Wins <br/>
-          <button ng-click= "main.newGame()"id= "playAgain">Play Again</button></div>
-        <div ng-show= "main.spaces === 0" class= "endGame"> Tie Game <br/>
-          <button ng-click= "main.newGame()" id= "playAgain">Play Again</button></div>
+
+      <div ng-show= "main.Winner === '1'" class= "gameEnd"> Player One Wins <br/>
+          <button ng-click= "main.newGame()" id= "playAgain">Play Again?</button></div>
+      <div ng-if= "main.Winner === '2'" class= "gameEnd"> Player Two Wins <br/>
+          <button ng-click= "main.newGame()"id= "playAgain">Play Again?</button></div>
+      <div ng-show= "main.spaces === 0" class= "tieGameEnd"> Tie Game <br/>
+          <button ng-click= "main.newGame()" id= "playAgain">Play Again?</button></div>
+
 
   <!-- Main Game Grid  -->
     <div class= "animationgrid">
@@ -38,17 +39,12 @@
    			  </div>
 
         </div>
+
         </div>
     </div>
-
-
-
-
-
     <div class="button">
       <button ng-click = "main.newGame()" id= "Reset">Reset Game</button></div>
-      <div id="header"><h6>Tic-Tac-Toe</h6></div>
-
+      <div id="header">Tic-Tac-Toe</div>
 
 
     </div>
