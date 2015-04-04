@@ -16,10 +16,12 @@
 				"./audio/ttc_07.mp3","./audio/ttc_08.mp3","./audio/ttc_09.mp3",
 				"./audio/ttc_10.mp3","./audio/ttc_11.mp3"
 			];
-			// var ref= new Firebase("https://tictactoefbapp.firebaseio.com/");
-			// var game=$firebaseObject(ref);
-
+			var ref= new Firebase("https://tictactoefbapp.firebaseio.com/");
+			var game=$firebaseObject(ref);
 			var self = this;
+				this.createGame = createGame();
+				self.game= game;
+				self.ref= ref;
 				self.playerMove = playerMove;
 				self.currentPlayer = 0 ;
 				self.selectPlayer = selectTurn();
@@ -36,7 +38,23 @@
 				{circle: null }, {circle: null }, {circle: null }
 				];
 
-			// RESETS TO NEW GAME //
+		// CREATES GAME ON FIREBASE //
+		function createGame() {
+				self.game = $firebaseObject(ref);
+				self.game.board = [
+					{circle: ""},{circle: ""},{circle: ""},
+					{circle: ""},{circle: ""},{circle: ""},
+					{circle: ""},{circle: ""},{circle: ""}
+					];
+				// self.game.Winner = 0;
+				// self.game.spaces = 9;
+				// self.game.playerOnePoints = 0;
+				// self.game.playerTwoPoints = 0;
+				self.game.$save(self.game);
+			};
+
+
+			// RESETS TO BOARD AND SCORE FOR NEW GAME //
 				function newGame() {
 					self.currentPlayer = 1;
 					self.Winner = 0;
@@ -49,11 +67,28 @@
 					resetSound.play();
 
 					}
+
+			// RESETS TO NEW GAME ONLY //
+				function playAgain() {
+					self.currentPlayer = 0;
+					self.Winner = 0;
+					self.spaces = 9;
+					self.playerOnePoints = self.playerOnePoints;
+					self.playerTwoPoints = self.playerTwoPoints;
+					self.board = [
+					{circle: null }, {circle: null }, {circle: null },
+					{circle: null }, {circle: null }, {circle: null },
+					{circle: null }, {circle: null }, {circle: null }
+					];
+					resetSound.play();
+
+					}
+
 				// SELECT TURN FUNCTION //
 				function selectTurn(){
 					self.currentPlayer = Math.ceil(Math.random() * 2);
-
 					}
+
 				// PLAYER MOVE FUNCTION //
 				function playerMove(index) {
 					  if (self.board[index].circle === null) {
@@ -74,7 +109,6 @@
 											self.switchTurn();
 									}
 						}
-
 				}
 				// SWITCHES TURNS FOR PLAYERS //
 				function switchTurn(){
@@ -146,7 +180,6 @@
 
 
 })();
-
 
 
 

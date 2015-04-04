@@ -13,7 +13,7 @@
     <!-- AngularFire -->
     <script src="js/angularfire.js"></script>
 
-<!--     <script type="js/app.js"></script> -->
+    <script type="js/app.js"></script>
     <script src="js/MainController.js"></script>
 
 
@@ -23,9 +23,9 @@
 
   <!-- Hidden Game Results Page -->
 
-    <div ng-show= "main.Winner === '1'" class= "gameEnd"> PLAYER ONE WINS<br/>
+    <div ng-show= "main.Winner === '1'" class= "gameEnd"> PLAYER X WINS<br/>
         <button ng-click= "main.newGame()" id= "playAgain">PLAY AGAIN?</button></div>
-    <div ng-if= "main.Winner === '2'" class= "gameEnd"> PLAYER TWO WINS <br/>
+    <div ng-if= "main.Winner === '2'" class= "gameEnd"> PLAYER O WINS <br/>
         <button ng-click= "main.newGame()"id= "playAgain">PLAY AGAIN?</button></div>
     <div ng-if= "main.spaces === 0" class= "tieGameEnd"> TIE GAME <br/>
         <button ng-click= "main.newGame()" id= "playAgain">PLAY AGAIN?</button></div>
@@ -46,10 +46,10 @@
 
     <div id="header">  TIC -TAC -TOE</div>
     <div class="button">
-      <button ng-click = "main.newGame()" id= "Reset"> RESET GAME</button></div>
+      <button ng-click = "main.newGame()" id= "Reset"> RESET GAME </button></div>
     <div class="lowerthird">
-      <div id= "playerOnePoints" > PLAYER ONE : {{main.playerOnePoints}}    </div>
-      <div id= "playerTwoPoints"> PLAYER TWO: {{main.playerTwoPoints}}    </div>
+      <div id= "playerOnePoints" > PLAYER X : {{main.playerOnePoints}}    </div>
+      <div id= "playerTwoPoints"> PLAYER O : {{main.playerTwoPoints}}    </div>
     </div>
 
 

@@ -8,6 +8,7 @@ body{
  font-size: 6em;
  font-style: bold;
  text-align: center;
+ margin: 0 auto;
 }
 button{
   height: 30px;
@@ -29,14 +30,14 @@ button{
   font-size: 40px;
   text-align: center;
   color: yellow;
-  margin-top: 40px;
+  margin-top: 50px;
+
 }
 
 .animationgrid{
   display: inline=block;
   position: relative;
   margin-top: 80px;
-
   margin: 0 auto;
   width: 490px;
   height:450px;
@@ -82,7 +83,8 @@ button{
   display: inline-block;
   margin-top:20px;
   position: relative;
-  margin: auto;
+  float: left;
+  margin: 0 auto;
   width: 150px;
   height: 150px;
   background: url('../img/soundwave2.jpg');
@@ -182,6 +184,7 @@ button{
   color: yellow;
   font-size: 50px;
   z-index: 1;
+
 }
 
 #playAgain {
@@ -203,13 +206,27 @@ button{
   font-size: 20px;
   height: 300px;
   width: 720px;
-  margin: top;
   margin: 0 auto;
-
+  animation-name: lowerthirdmove;
+  animation-duration: 5s;
+  animation-iteration-count: 1;
+  -webkit-animation-name: lowerthirdmove;
+  -webkit-animation-duration: 5s;
+  -webkit-animation-iteration-count: 1;
 }
+
+@-webkit-keyframes lowerthirdmove{
+    0%{ margin-top:100%;
+        color: transparent;
+      }
+    100%{background-color: transparent;
+    }
+}
+
+
 #playerOnePoints{
   float: left;
-   opacity: .90;
+  opacity: .90;
 }
 
 #playerTwoPoints{
