@@ -33,6 +33,7 @@
 				self.spaces = 9;
 				self.playerOnePoints = 0;
 				self.playerTwoPoints = 0;
+				self.resetScore = resetScore;
 				self.board = [
 				{circle: null }, {circle: null }, {circle: null },
 				{circle: null }, {circle: null }, {circle: null },
@@ -59,8 +60,6 @@
 				self.game.playerTwoPoints = 0;
 				self.game.$save(self.game);
 			}
-
-
 			// RESETS GAME BOARD AND SCORE FOR NEW GAME //
 				function newGame() {
 					self.currentPlayer = 1;
@@ -75,6 +74,20 @@
 					self.game.$save(self.game);
 					}
 
+				function resetScore(){
+					self.Winner = 0;
+					self.spaces= 9;
+					self.playerOnePoints= 0;
+					self.playerTwoPoints= 0;
+					self.board = [
+					{circle: null }, {circle: null }, {circle: null },
+					{circle: null }, {circle: null }, {circle: null },
+					{circle: null }, {circle: null }, {circle: null }
+					];
+					resetSound.play();
+
+				}
+
 				// SELECT TURN FUNCTION //
 				function selectTurn(){
 					self.currentPlayer = Math.ceil(Math.random() * 2);
@@ -82,43 +95,38 @@
 
 				// PLAYER MOVE FUNCTION //
 				function playerMove(index) {
-					  if (self.board[index].circle === null) {
-					  				// RANDOM SOUNDS PLAYS DURING PLAYERMOVE //
-					  				var randomSound=Math.floor(Math.random()*sounds.length);
-					  				var newSounds= new Audio(sounds[randomSound]);
-					  					newSounds.play();
-									  if (self.currentPlayer === 1) {
-											self.board[index].circle = "X";
-											self.spaces--;
-											self.getWinner();
-											self.switchTurn();
-
-									} else if (self.currentPlayer === 2) {
-											self.board[index].circle = "O";
-											self.spaces--;
-											self.getWinner();
-											self.switchTurn();
-									}
+				  if (self.board[index].circle === null) {
+	  				// RANDOM SOUNDS PLAYS DURING PLAYERMOVE //
+	  				var randomSound=Math.floor(Math.random()*sounds.length);
+	  				var newSounds= new Audio(sounds[randomSound]);
+	  					newSounds.play();
+						if (self.currentPlayer === 1) {
+								self.board[index].circle = "X";
+								self.spaces--;
+								self.getWinner();
+								self.switchTurn();
 						}
-
+						else if (self.currentPlayer === 2) {
+								self.board[index].circle = "O";
+								self.spaces--;
+								self.getWinner();
+								self.switchTurn();
+						}
+					}
 				}
 
 				// SWITCHES TURNS FOR PLAYERS //
 				function switchTurn(){
 						if (self.currentPlayer === 1) {
 								self.currentPlayer = 2;
-
 						}
 						else if (self.currentPlayer === 2){
 								self.currentPlayer = 1;
-
 						}
-
 				}
+					// GAME LOGIC- DETERMINES GAME WINNER AND TIE, ADDS TO SCOREBOARD //
 
-				// GAME LOGIC- DETERMINES GAME WINNER AND TIE //
-					function getWinner() {
-
+				function getWinner() {
 						if (
 
 						self.board[0].circle == 'X' && self.board[1].circle == 'X' && self.board[2].circle == 'X' ||
@@ -156,25 +164,14 @@
 					console.log(self.playerTwoPoints);
 					winSound.play();
 
-
 				}
-				else if (self.spaces === 0)
-					{self.Winner= "Tie";
+				else if (self.spaces === 0){
+					self.Winner= "Tie";
 					console.log(self.Winner);
 					winSound.play();
 					self.playerOnePoints = self.playerOnePoints;
 					self.playerTwoPoints = self.playerTwoPoints;
 				}
-
 			}
-
 		}
-
-
-
 })();
-
-
-
-
-

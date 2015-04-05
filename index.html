@@ -26,9 +26,10 @@
 
     <div ng-show= "main.Winner === '1'" class= "gameEnd"> PLAYER {{main.nameX}} WINS<br/>
         <button ng-click= "main.newGame()" id= "playAgain">PLAY AGAIN?</button></div>
-    <div ng-if= "main.Winner === '2'" class= "gameEnd"> PLAYER {{main.nameO}} WINS <br/>
+    <div ng-show= "main.Winner === '2'" class= "gameEnd"> PLAYER {{main.nameO}} WINS <br/>
         <button ng-click= "main.newGame()"id= "playAgain">PLAY AGAIN?</button></div>
-    <div ng-if= "main.spaces === 0" class= "tieGameEnd"> TIE GAME <br/>
+
+    <div ng-if= "main.spaces === 0" class= "tieGameEnd" ng-hide="main.Winner === '1'"> TIE GAME <br/>
         <button ng-click= "main.newGame()" id= "playAgain">PLAY AGAIN?</button></div>
 
   <!-- Main Game Grid  -->
@@ -37,15 +38,16 @@
       <div class = "gamegrid">
   		  <div class="container" ng-repeat="circle in main.board track by $index">
    			  <div class ="circles" ng-click="main.playerMove($index)">{{circle.circle}}
-   			  </div>
+          </div>
         </div>
       </div>
     </div>
+
   <!-- Player Name, Score and Reset-->
-    <div id="header">  TIC -TAC -TOE</div>
-    <div class="button">
-      <button ng-click = "main.newGame()" id= "Reset"> RESET GAME </button></div>
+    <div id="header">TIC -TAC -TOE</div>
     <div class="lowerthird">
+    <div class="button">
+      <button ng-click = "main.resetScore()" id= "Reset"> RESET GAME </button></div>
       <div id= "playerOnePoints"> PLAYER {{main.nameX}} IS X : {{main.playerOnePoints}}</div>
       <div id= "playerTwoPoints"> PLAYER {{main.nameO}} IS O : {{main.playerTwoPoints}}</div>
     <div class="loginWrapper">
@@ -56,8 +58,6 @@
 
         </br>
         </br>
-
-
         </div>
       </div>
     </div>

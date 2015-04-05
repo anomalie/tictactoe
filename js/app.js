@@ -1,6 +1,6 @@
-// (function (){
-// angular.module("mainController", ['firebase']);
+(function (){
+angular.module("mainController", ['firebase']);
 
-// })();
+})();
 
 
