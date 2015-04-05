@@ -7,14 +7,18 @@
 
 				//SET CONTROLLER FUNCTION & VARIABLES//
 		function mainController($firebaseObject,$firebaseArray){
-
+			var introSound = new Audio ("./audio/intro.mp3");
+			var submitSound = new Audio ("./audio/ttc_01.mp3");
 			var winSound = new Audio ("./audio/ending.mp3");
 			var resetSound = new Audio ("./audio/Reset.mp3");
 			var sounds = [
 			  "./audio/ttc_01.mp3","./audio/ttc_02.mp3","./audio/ttc_03.mp3",
 				"./audio/ttc_04.mp3","./audio/ttc_05.mp3","./audio/ttc_06.mp3",
 				"./audio/ttc_07.mp3","./audio/ttc_08.mp3","./audio/ttc_09.mp3",
-				"./audio/ttc_10.mp3","./audio/ttc_11.mp3"
+				"./audio/ttc_10.mp3","./audio/ttc_11.mp3","./audio/ttc_12.mp3",
+				"./audio/ttc_13.mp3","./audio/ttc_14.mp3","./audio/ttc_15.mp3",
+				"./audio/ttc_16.mp3","./audio/ttc_17.mp3","./audio/ttc_18.mp3",
+				"./audio/ttc_19.mp3"
 			];
 			var ref= new Firebase("https://tictactoefbapp.firebaseio.com/");
 			var game=$firebaseObject(ref);
@@ -24,7 +28,7 @@
 				self.game= game;
 				self.ref= ref;
 				self.playerMove = playerMove;
-				self.currentPlayer = 0 ;
+				self.currentPlayer = 1 ;
 				self.selectPlayer = selectTurn();
 				self.switchTurn = switchTurn;
 				self.getWinner= getWinner;
@@ -39,6 +43,7 @@
 				{circle: null }, {circle: null }, {circle: null },
 				{circle: null }, {circle: null }, {circle: null }
 				];
+				introSound.play();
 
 		// CREATES GAME ON FIREBASE //
 			function createGame() {
@@ -62,7 +67,7 @@
 			}
 			// RESETS GAME BOARD AND SCORE FOR NEW GAME //
 				function newGame() {
-					self.currentPlayer = 1;
+					self.currentPlayer = 0;
 					self.Winner = 0;
 					self.spaces = 9;
 					self.board = [
