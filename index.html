@@ -21,11 +21,12 @@
 
 	<body ng-controller="mainController as main">
 
+
   <!-- Hidden Game Results Page -->
 
-    <div ng-show= "main.Winner === '1'" class= "gameEnd"> PLAYER X WINS<br/>
+    <div ng-show= "main.Winner === '1'" class= "gameEnd"> PLAYER {{main.nameX}} WINS<br/>
         <button ng-click= "main.newGame()" id= "playAgain">PLAY AGAIN?</button></div>
-    <div ng-if= "main.Winner === '2'" class= "gameEnd"> PLAYER O WINS <br/>
+    <div ng-if= "main.Winner === '2'" class= "gameEnd"> PLAYER {{main.nameO}} WINS <br/>
         <button ng-click= "main.newGame()"id= "playAgain">PLAY AGAIN?</button></div>
     <div ng-if= "main.spaces === 0" class= "tieGameEnd"> TIE GAME <br/>
         <button ng-click= "main.newGame()" id= "playAgain">PLAY AGAIN?</button></div>
@@ -35,26 +36,31 @@
     <div class= "animationgrid">
       <div class = "gamegrid">
   		  <div class="container" ng-repeat="circle in main.board track by $index">
-   			  <div class ="circles" ng-click="main.playerMove($index)">
-        {{circle.circle}}
+   			  <div class ="circles" ng-click="main.playerMove($index)">{{circle.circle}}
    			  </div>
-
         </div>
-
-        </div>
+      </div>
     </div>
-
+  <!-- Player Name, Score and Reset-->
     <div id="header">  TIC -TAC -TOE</div>
     <div class="button">
       <button ng-click = "main.newGame()" id= "Reset"> RESET GAME </button></div>
     <div class="lowerthird">
-      <div id= "playerOnePoints" > PLAYER X : {{main.playerOnePoints}}    </div>
-      <div id= "playerTwoPoints"> PLAYER O : {{main.playerTwoPoints}}    </div>
+      <div id= "playerOnePoints"> PLAYER {{main.nameX}} IS X : {{main.playerOnePoints}}</div>
+      <div id= "playerTwoPoints"> PLAYER {{main.nameO}} IS O : {{main.playerTwoPoints}}</div>
+    <div class="loginWrapper">
+        <input id="loginNameX" type="text" placeholder="Enter Name" ng-model="main.nameX" ng-hide="loginShowX">
+        <button id="loginSubmitX" ng-hide="loginShowX" ng-click= "loginShowX= 'false'">SUBMIT</button>
+        <button id="loginSubmitO" ng-hide="loginShowO" ng-click= "loginShowO= 'false'">SUBMIT</button>
+        <input id="loginNameO" type="text" placeholder="Enter Name" ng-model="main.nameO" ng-hide="loginShowO">
+
+        </br>
+        </br>
+
+
+        </div>
+      </div>
     </div>
-
-
-
-
 
 
 

@@ -6,7 +6,7 @@
 	mainController.$inject = ['$firebaseObject'];
 
 				//SET CONTROLLER FUNCTION & VARIABLES//
-		function mainController($firebaseObject){
+		function mainController($firebaseObject,$firebaseArray){
 
 			var winSound = new Audio ("./audio/ending.mp3");
 			var resetSound = new Audio ("./audio/Reset.mp3");
@@ -20,6 +20,7 @@
 			var game=$firebaseObject(ref);
 			var self = this;
 				this.createGame = createGame();
+				self.enterName = 1;
 				self.game= game;
 				self.ref= ref;
 				self.playerMove = playerMove;
@@ -39,22 +40,28 @@
 				];
 
 		// CREATES GAME ON FIREBASE //
-		function createGame() {
+			function createGame() {
 				self.game = $firebaseObject(ref);
 				self.game.board = [
 					{circle: ""},{circle: ""},{circle: ""},
 					{circle: ""},{circle: ""},{circle: ""},
 					{circle: ""},{circle: ""},{circle: ""}
 					];
-				// self.game.Winner = 0;
-				// self.game.spaces = 9;
-				// self.game.playerOnePoints = 0;
-				// self.game.playerTwoPoints = 0;
+				self.playerMove = playerMove;
+				self.currentPlayer = 0 ;
+				self.selectPlayer = selectTurn();
+				self.switchTurn = switchTurn;
+				self.getWinner= getWinner;
+				self.newGame = newGame;
+				self.game.Winner = 0;
+				self.game.spaces = 9;
+				self.game.playerOnePoints = 0;
+				self.game.playerTwoPoints = 0;
 				self.game.$save(self.game);
-			};
+			}
 
 
-			// RESETS TO BOARD AND SCORE FOR NEW GAME //
+			// RESETS GAME BOARD AND SCORE FOR NEW GAME //
 				function newGame() {
 					self.currentPlayer = 1;
 					self.Winner = 0;
@@ -65,23 +72,7 @@
 					{circle: null }, {circle: null }, {circle: null }
 					];
 					resetSound.play();
-
-					}
-
-			// RESETS TO NEW GAME ONLY //
-				function playAgain() {
-					self.currentPlayer = 0;
-					self.Winner = 0;
-					self.spaces = 9;
-					self.playerOnePoints = self.playerOnePoints;
-					self.playerTwoPoints = self.playerTwoPoints;
-					self.board = [
-					{circle: null }, {circle: null }, {circle: null },
-					{circle: null }, {circle: null }, {circle: null },
-					{circle: null }, {circle: null }, {circle: null }
-					];
-					resetSound.play();
-
+					self.game.$save(self.game);
 					}
 
 				// SELECT TURN FUNCTION //
@@ -109,7 +100,9 @@
 											self.switchTurn();
 									}
 						}
+
 				}
+
 				// SWITCHES TURNS FOR PLAYERS //
 				function switchTurn(){
 						if (self.currentPlayer === 1) {

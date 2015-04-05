@@ -9,6 +9,7 @@ body{
  font-style: bold;
  text-align: center;
  margin: 0 auto;
+ text-transform: uppercase;
 }
 button{
   height: 30px;
@@ -23,16 +24,6 @@ button{
  @font-face {
     font-family: neonLights;
     src: url(../fonts/NEON_LIGHTS.woff)}
-
-
-#header {
-  font-family: neonLights;
-  font-size: 40px;
-  text-align: center;
-  color: yellow;
-  margin-top: 50px;
-
-}
 
 .animationgrid{
   display: inline=block;
@@ -95,7 +86,6 @@ button{
   border-radius: 50%;
   overflow: hidden;
   cursor: pointer;
-  border-width: 20px;
   text-align: center;
 
   animation-name: circlespin;
@@ -145,8 +135,8 @@ button{
   text-decoration: bold;
   opacity: .80;
 
-  transition: .8s ease;
-  transition: .8s ease;
+  transition: .7s ease;
+/*  transition: .7s ease;*/
 
 }
 
@@ -169,6 +159,7 @@ button{
   padding-top: 20%;
   color: yellow;
   font-size: 50px;
+  text-transform: uppercase;
   z-index: 1;
 
 }
@@ -183,6 +174,7 @@ button{
   padding-top: 20%;
   color: yellow;
   font-size: 50px;
+  text-transform: uppercase;
   z-index: 1;
 
 }
@@ -193,19 +185,28 @@ button{
   border: 1px solid yellow;
 }
 
+#header {
+  font-family: neonLights;
+  font-size: 40px;
+  text-align: center;
+  color: yellow;
+  margin-top: 50px;
+
+}
+
 #Reset {
   margin-top: 30px;
   background: transparent;
   border: 1px solid yellow;
-  opacity: .7;
+  opacity: .9;
 
 }
 
 .lowerthird{
   display: inline-block;
-  font-size: 20px;
-  height: 300px;
-  width: 720px;
+  font-size: 25px;
+  height: 500px;
+  width: 810px;
   margin: 0 auto;
   animation-name: lowerthirdmove;
   animation-duration: 5s;
@@ -220,19 +221,106 @@ button{
         color: transparent;
       }
     100%{background-color: transparent;
+
     }
 }
 
 
 #playerOnePoints{
+
   float: left;
   opacity: .90;
 }
 
 #playerTwoPoints{
 
-float: right;
-opacity: .90;
+  float: right;
+  opacity: .90;
 
 }
+.loginwrapper{
+
+  display: inline-block;
+  clear:none;
+  margin: 0 auto;
+  height:200px;
+  width: 810px;
+
+}
+
+
+#loginNameX{
+  opacity: 100;
+  position: relative;
+  float: left;
+  height: 29px;
+  width: 102px;
+  display: inline-block;
+  border: 1px solid yellow;
+  font-size:13px;
+  margin: 0 auto;
+  margin-top: 10px;
+  background: transparent;
+  text-transform: uppercase;
+  padding: 2px;
+
+}
+
+#loginNameO{
+  opacity: 100;
+  position:relative;
+  float: right;
+  height: 29px;
+  width: 102px;
+  display: inline-block;
+  border: 1px solid yellow;
+  font-size:13px;
+  margin: 0 auto;
+  margin-top: 10px;
+  background: transparent;
+  text-transform: uppercase;
+  padding: 2px;
+}
+
+#loginSubmitX{
+  color: limegreen;
+  opacity:.9;
+  height: 28px;
+  position:relative;
+  width: 90px;
+  background-color: transparent;
+  font-size: 13px;
+  font-weight: bold;
+  text-align: center;
+  border: 2px solid yellow;
+  border-style: outset;
+  padding: 4px;
+  float:left;
+  margin:10px;
+  opacity: .9;
+
+
+
+}
+#loginSubmitO{
+  color:orange;
+  opacity:.9;
+  height: 28px;
+  width: 90px;
+  position:relative;
+  background-color: transparent;
+  font-size: 13px;
+  font-weight: bold;
+  border: 2px solid yellow;
+  border-style: outset;
+  text-align: center;
+  float: right;
+  padding: 4px;
+  margin-left:10px;
+
+
+
+}
+
+
 
