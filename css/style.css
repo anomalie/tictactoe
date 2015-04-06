@@ -36,10 +36,10 @@ button{
   height:450px;
   animation-name: animations;
   animation-duration: 4s;
-  animation-delay: .2s;
+  animation-delay: .3s;
   animation-iteration-count: 5;
   -webkit-animation-name: animations;
-  -webkit-animation-delay: .2s;
+  -webkit-animation-delay: .3s;
   -webkit-animation-duration: 4s;
   -webkit-animation-iteration-count: 1;
 }
@@ -88,10 +88,10 @@ button{
   text-align: center;
   animation-name: circlespin;
   animation-duration: 2s;
-  animation-delay: .1s;
+  animation-delay: .2s;
   animation-iteration-count: 1;
   -webkit-animation-name: circlespin;
-  -webkit-animation-delay: .1s;
+  -webkit-animation-delay: .2s;
   -webkit-animation-duration: 2s;
   -webkit-animation-iteration-count: 2;
 }
@@ -129,17 +129,17 @@ button{
   text-align: center;
   text-decoration: bold;
   opacity: .80;
-  transition: .6s ease;
+  transition: .7s ease;
 
 
 }
 
 .container:hover .circles{
-  opacity: 0;
+  opacity: 10;
   width: 100%;
   height: 100%;
   text-align: center;
-  float:right;
+
 }
 
 /*GAME END CSS*/
@@ -153,7 +153,7 @@ button{
   padding-top: 20%;
   font-size: 50px;
   text-transform: uppercase;
-  z-index: 1;
+  z-index: 2;
 
 }
 
@@ -186,12 +186,12 @@ button{
   margin-top: 50px;
   animation-name: spin;
   animation-duration: 5s;
-  animation-delay: 6.5s;
+  animation-delay: 4.5s;
   animation-iteration-count: 1;
 
   -webkit-animation-name: spin;
   -webkit-animation-duration: 5s;
-  -webkit-animation-delay: 6.5s;
+  -webkit-animation-delay: 4.5s;
   -webkit-animation-iteration-count: 1;
 }
 
@@ -199,10 +199,8 @@ button{
     0%{font-size:40px}
     25%{font-size:42px}
     50%{font-size:44px}
-    75%{font-size:42px}
-    80%{font-size:41px}
     91%{font-size:40px;
-    transform: rotateX(720deg)
+    transform: rotateX(360deg)
 
     }
 

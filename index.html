@@ -20,11 +20,11 @@
 	<body ng-controller="mainController as main">
   <!-- Hidden Game Results Page -->
 
-    <div ng-show= "main.Winner === '1'" class= "gameEnd"> X: {{main.nameX}} IS THE WINNER<br/>
+    <div ng-show= "main.Winner === '1'" class= "gameEnd"> X : {{main.nameX}} IS THE WINNER<br/>
         <button ng-click= "main.newGame()" id= "playAgain">PLAY AGAIN?</button></div>
-    <div ng-show= "main.Winner === '2'" class= "gameEnd"> O: {{main.nameO}} IS THE WINNER <br/>
+    <div ng-show= "main.Winner === '2'" class= "gameEnd"> O : {{main.nameO}} IS THE WINNER <br/>
         <button ng-click= "main.newGame()"id= "playAgain">PLAY AGAIN?</button></div>
-    <div ng-if= "main.spaces === 0" class= "tieGameEnd" ng-hide="main.endGame"> TIE GAME <br/>
+    <div ng-if= "main.spaces === 0" class= "tieGameEnd" ng-hide="gameEnd"> TIE GAME <br/>
         <button ng-click= "main.newGame()" id= "playAgain">PLAY AGAIN?</button></div>
 
   <!-- Main Game Grid  -->
