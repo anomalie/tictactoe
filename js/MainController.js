@@ -3,10 +3,10 @@
 		.module('ttcApp',['firebase'])
 		.controller('mainController', mainController);
 
-	mainController.$inject = ['$firebaseObject'];
+	mainController.$inject = ['$scope','$firebaseObject','$firebaseArray'];
 
 				//SET CONTROLLER FUNCTION & VARIABLES//
-		function mainController($firebaseObject,$firebaseArray){
+		function mainController($scope,$firebaseObject,$firebaseArray){
 
 			var introSound = new Audio ("./audio/intro.mp3");
 			var submitSound = new Audio ("./audio/ttc_01.mp3");
@@ -30,12 +30,13 @@
 				self.selectPlayer = selectTurn();
 				self.switchTurn = switchTurn;
 				self.getWinner= getWinner;
-				self.newGame = newGame;
-				self.Winner = 0;
-				self.spaces = 9;
-				self.playerOnePoints = 0;
-				self.playerTwoPoints = 0;
 				self.resetScore = resetScore;
+				self.newGame = newGame;
+				// self.Winner = 0;
+				// self.spaces = 9;
+				// self.playerOnePoints = 0;
+				// self.playerTwoPoints = 0;
+
 				// self.board = [
 				// {circle: null }, {circle: null }, {circle: null },
 				// {circle: null }, {circle: null }, {circle: null },
@@ -62,28 +63,29 @@
 				self.game.spaces = 9;
 				self.game.playerOnePoints = 0;
 				self.game.playerTwoPoints = 0;
-				self.resetScore = resetScore;
 				self.game.$save(self.game);
 			}
 			// RESETS GAME BOARD AND SCORE FOR NEW GAME //
 			function newGame() {
-				self.currentPlayer = 1;
-				self.Winner = 0;
-				self.spaces = 9;
+
+				self.game.currentPlayer = 1;
+				self.game.Winner = 0;
+				self.game.spaces = 9;
 				self.game.board = [
-				{circle: null }, {circle: null }, {circle: null },
-				{circle: null }, {circle: null }, {circle: null },
-				{circle: null }, {circle: null }, {circle: null }
+				{circle: "" }, {circle: "" }, {circle: "" },
+				{circle: "" }, {circle: "" }, {circle: "" },
+				{circle: "" }, {circle: "" }, {circle: "" }
 				];
 				resetSound.play();
 				self.game.$save(self.game);
 				}
 
 			function resetScore(){
-				self.Winner = 0;
-				self.spaces= 9;
-				self.playerOnePoints= 0;
-				self.playerTwoPoints= 0;
+				self.game.currentPlayer = 1;
+				self.game.Winner = 0;
+				self.game.spaces= 9;
+				self.game.playerOnePoints= 0;
+				self.game.playerTwoPoints= 0;
 				self.game.board = [
 				{circle: "" }, {circle: "" }, {circle: "" },
 				{circle: "" }, {circle: "" }, {circle: "" },
@@ -96,28 +98,29 @@
 
 			// SELECT TURN FUNCTION //
 			function selectTurn(){
-				self.currentPlayer = Math.ceil(Math.random() * 2);
+				self.game.currentPlayer = Math.ceil(Math.random() * 2);
+				self.game.$save(self.game);
 				}
 
 			// PLAYER MOVE FUNCTION //
 			function playerMove(index) {
 
-				console.log(self.game.board[index])
+				console.log(self.game.board[index]);
 				console.log(self.game.currentPlayer);
 			  if (self.game.board[index].circle === "") {
   				// RANDOM SOUNDS PLAYS DURING PLAYERMOVE //
-  				// var randomSound=Math.floor(Math.random()*sounds.length);
-  				// var newSounds= new Audio(sounds[randomSound]);
-  					// newSounds.play();
+  				var randomSound=Math.floor(Math.random()*sounds.length);
+  				var newSounds= new Audio(sounds[randomSound]);
+  					newSounds.play();
 					if (self.game.currentPlayer === 1) {
 							self.game.board[index].circle = "X";
-							self.spaces--;
+							self.game.spaces--;
 							self.getWinner();
 							self.switchTurn();
 					}
 					else if (self.game.currentPlayer === 2) {
 							self.game.board[index].circle = "O";
-							self.spaces--;
+							self.game.spaces--;
 							self.getWinner();
 							self.switchTurn();
 					}
@@ -150,10 +153,10 @@
 		      self.game.board[2].circle == 'X' && self.game.board[5].circle == 'X' && self.game.board[8].circle == 'X'
 					) {
 
-					self.Winner = "1";
-					self.playerOnePoints++;
-					console.log(self.Winner);
-					console.log(self.playerOnePoints);
+					self.game.Winner = "1";
+					self.game.playerOnePoints++;
+					console.log(self.game.Winner);
+					console.log(self.game.playerOnePoints);
 					winSound.play();
 
 					} else if (
@@ -168,20 +171,22 @@
 			    self.game.board[2].circle == 'O' && self.game.board[5].circle == 'O' && self.game.board[8].circle == 'O'
 
 					) {
-					self.Winner = "2";
-					self.playerTwoPoints++;
-					console.log(self.Winner);
-					console.log(self.playerTwoPoints);
+					self.game.Winner = "2";
+					self.game.playerTwoPoints++;
+					console.log(self.game.Winner);
+					console.log(self.game.playerTwoPoints);
 					winSound.play();
 
 				}
 				else if (self.spaces === 0){
-					self.Winner= "Tie";
-					console.log(self.Winner);
+					self.game.Winner= "Tie";
+					console.log(self.game.Winner);
 					winSound.play();
-					self.playerOnePoints = self.playerOnePoints;
-					self.playerTwoPoints = self.playerTwoPoints;
+					self.game.playerOnePoints = self.game.playerOnePoints;
+					self.game.playerTwoPoints = self.game.playerTwoPoints;
 				}
+
+				self.game.$save(self.game);
 			}
 		}
 })();
