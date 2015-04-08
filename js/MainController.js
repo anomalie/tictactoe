@@ -21,13 +21,12 @@
 				"./audio/ttc_16.mp3","./audio/ttc_17.mp3","./audio/ttc_18.mp3",
 				"./audio/ttc_19.mp3"];
 			var ref= new Firebase("https://tictactoefbapp.firebaseio.com/");
-			var game=$firebaseObject(ref);
 			var self = this;
+			self.game = $firebaseObject(ref);
 				this.createGame = createGame();
-				self.game= game;
 				self.ref= ref;
 				self.playerMove = playerMove;
-				self.currentPlayer = 0 ;
+				// self.game.currentPlayer = 1;
 				self.selectPlayer = selectTurn();
 				self.switchTurn = switchTurn;
 				self.getWinner= getWinner;
@@ -37,11 +36,11 @@
 				self.playerOnePoints = 0;
 				self.playerTwoPoints = 0;
 				self.resetScore = resetScore;
-				self.board = [
-				{circle: null }, {circle: null }, {circle: null },
-				{circle: null }, {circle: null }, {circle: null },
-				{circle: null }, {circle: null }, {circle: null }
-				];
+				// self.board = [
+				// {circle: null }, {circle: null }, {circle: null },
+				// {circle: null }, {circle: null }, {circle: null },
+				// {circle: null }, {circle: null }, {circle: null }
+				// ];
 
 				introSound.play();
 
@@ -54,7 +53,7 @@
 					{circle: ""},{circle: ""},{circle: ""}
 					];
 				self.playerMove = playerMove;
-				self.currentPlayer = 0 ;
+				self.game.currentPlayer = 1 ;
 				self.selectPlayer = selectTurn();
 				self.switchTurn = switchTurn;
 				self.getWinner= getWinner;
@@ -71,12 +70,13 @@
 				self.currentPlayer = 1;
 				self.Winner = 0;
 				self.spaces = 9;
-				self.board = [
+				self.game.board = [
 				{circle: null }, {circle: null }, {circle: null },
 				{circle: null }, {circle: null }, {circle: null },
 				{circle: null }, {circle: null }, {circle: null }
 				];
 				resetSound.play();
+				self.game.$save(self.game);
 				}
 
 			function resetScore(){
@@ -84,12 +84,13 @@
 				self.spaces= 9;
 				self.playerOnePoints= 0;
 				self.playerTwoPoints= 0;
-				self.board = [
-				{circle: null }, {circle: null }, {circle: null },
-				{circle: null }, {circle: null }, {circle: null },
-				{circle: null }, {circle: null }, {circle: null }
+				self.game.board = [
+				{circle: "" }, {circle: "" }, {circle: "" },
+				{circle: "" }, {circle: "" }, {circle: "" },
+				{circle: "" }, {circle: "" }, {circle: "" }
 				];
 				resetSound.play();
+				self.game.$save(self.game);
 
 			}
 
@@ -100,48 +101,53 @@
 
 			// PLAYER MOVE FUNCTION //
 			function playerMove(index) {
-			  if (self.board[index].circle === null) {
+
+				console.log(self.game.board[index])
+				console.log(self.game.currentPlayer);
+			  if (self.game.board[index].circle === "") {
   				// RANDOM SOUNDS PLAYS DURING PLAYERMOVE //
-  				var randomSound=Math.floor(Math.random()*sounds.length);
-  				var newSounds= new Audio(sounds[randomSound]);
-  					newSounds.play();
-					if (self.currentPlayer === 1) {
-							self.board[index].circle = "X";
+  				// var randomSound=Math.floor(Math.random()*sounds.length);
+  				// var newSounds= new Audio(sounds[randomSound]);
+  					// newSounds.play();
+					if (self.game.currentPlayer === 1) {
+							self.game.board[index].circle = "X";
 							self.spaces--;
 							self.getWinner();
 							self.switchTurn();
 					}
-					else if (self.currentPlayer === 2) {
-							self.board[index].circle = "O";
+					else if (self.game.currentPlayer === 2) {
+							self.game.board[index].circle = "O";
 							self.spaces--;
 							self.getWinner();
 							self.switchTurn();
 					}
 				}
+				self.game.$save(self.game);
 			}
 
 			// SWITCHES TURNS FOR PLAYERS //
 			function switchTurn(){
-					if (self.currentPlayer === 1) {
-							self.currentPlayer = 2;
+					if (self.game.currentPlayer === 1) {
+							self.game.currentPlayer = 2;
 					}
-					else if (self.currentPlayer === 2){
-							self.currentPlayer = 1;
+					else if (self.game.currentPlayer === 2){
+							self.game.currentPlayer = 1;
 					}
+					self.game.$save(self.game);
 			}
 				// GAME LOGIC- DETERMINES GAME WINNER AND TIE, ADDS TO SCOREBOARD //
 
 				function getWinner() {
 					if (
 
-					self.board[0].circle == 'X' && self.board[1].circle == 'X' && self.board[2].circle == 'X' ||
-			    self.board[3].circle == 'X' && self.board[4].circle == 'X' && self.board[5].circle == 'X' ||
-			    self.board[6].circle == 'X' && self.board[7].circle == 'X' && self.board[8].circle == 'X' ||
-			    self.board[0].circle == 'X' && self.board[4].circle == 'X' && self.board[8].circle == 'X' ||
-			    self.board[2].circle == 'X' && self.board[4].circle == 'X' && self.board[6].circle == 'X' ||
-		      self.board[0].circle == 'X' && self.board[3].circle == 'X' && self.board[6].circle == 'X' ||
-		   		self.board[1].circle == 'X' && self.board[4].circle == 'X' && self.board[7].circle == 'X' ||
-		      self.board[2].circle == 'X' && self.board[5].circle == 'X' && self.board[8].circle == 'X'
+					self.game.board[0].circle == 'X' && self.game.board[1].circle == 'X' && self.game.board[2].circle == 'X' ||
+			    self.game.board[3].circle == 'X' && self.game.board[4].circle == 'X' && self.game.board[5].circle == 'X' ||
+			    self.game.board[6].circle == 'X' && self.game.board[7].circle == 'X' && self.game.board[8].circle == 'X' ||
+			    self.game.board[0].circle == 'X' && self.game.board[4].circle == 'X' && self.game.board[8].circle == 'X' ||
+			    self.game.board[2].circle == 'X' && self.game.board[4].circle == 'X' && self.game.board[6].circle == 'X' ||
+		      self.game.board[0].circle == 'X' && self.game.board[3].circle == 'X' && self.game.board[6].circle == 'X' ||
+		   		self.game.board[1].circle == 'X' && self.game.board[4].circle == 'X' && self.game.board[7].circle == 'X' ||
+		      self.game.board[2].circle == 'X' && self.game.board[5].circle == 'X' && self.game.board[8].circle == 'X'
 					) {
 
 					self.Winner = "1";
@@ -152,14 +158,14 @@
 
 					} else if (
 
-				 	self.board[0].circle == 'O' && self.board[1].circle == 'O' && self.board[2].circle == 'O' ||
-			    self.board[3].circle == 'O' && self.board[4].circle == 'O' && self.board[5].circle == 'O' ||
-			    self.board[6].circle == 'O' && self.board[7].circle == 'O' && self.board[8].circle == 'O' ||
-			    self.board[0].circle == 'O' && self.board[4].circle == 'O' && self.board[8].circle == 'O' ||
-			    self.board[2].circle == 'O' && self.board[4].circle == 'O' && self.board[6].circle == 'O' ||
-			    self.board[0].circle == 'O' && self.board[3].circle == 'O' && self.board[6].circle == 'O' ||
-			    self.board[1].circle == 'O' && self.board[4].circle == 'O' && self.board[7].circle == 'O' ||
-			    self.board[2].circle == 'O' && self.board[5].circle == 'O' && self.board[8].circle == 'O'
+				 	self.game.board[0].circle == 'O' && self.game.board[1].circle == 'O' && self.game.board[2].circle == 'O' ||
+			    self.game.board[3].circle == 'O' && self.game.board[4].circle == 'O' && self.game.board[5].circle == 'O' ||
+			    self.game.board[6].circle == 'O' && self.game.board[7].circle == 'O' && self.game.board[8].circle == 'O' ||
+			    self.game.board[0].circle == 'O' && self.game.board[4].circle == 'O' && self.game.board[8].circle == 'O' ||
+			    self.game.board[2].circle == 'O' && self.game.board[4].circle == 'O' && self.game.board[6].circle == 'O' ||
+			    self.game.board[0].circle == 'O' && self.game.board[3].circle == 'O' && self.game.board[6].circle == 'O' ||
+			    self.game.board[1].circle == 'O' && self.game.board[4].circle == 'O' && self.game.board[7].circle == 'O' ||
+			    self.game.board[2].circle == 'O' && self.game.board[5].circle == 'O' && self.game.board[8].circle == 'O'
 
 					) {
 					self.Winner = "2";

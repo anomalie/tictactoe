@@ -31,7 +31,7 @@
 
     <div class= "animationgrid">
       <div class = "gamegrid">
-  		  <div class="container" ng-repeat="circle in main.board track by $index">
+  		  <div class="container" ng-repeat="circle in main.game.board track by $index">
    			  <div class ="circles" ng-click="main.playerMove($index)">{{circle.circle}}
           </div>
         </div>
