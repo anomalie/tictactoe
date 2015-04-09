@@ -48,10 +48,10 @@
         <div id= "playerOnePoints">  {{binding.nameX}}  X : {{main.game.playerOnePoints}}</div>
         <div id= "playerTwoPoints">  {{binding.nameO}} O : {{main.game.playerTwoPoints}}</div>
       <div class="loginWrapper">
-        <input id="loginNameX" type="text" placeholder="Enter Name" ng-model="binding.nameX" ng-hide="loginShowX">
-        <button id="loginSubmitX" ng-hide="loginShowX" ng-click= "loginShowX= 'false'">SUBMIT</button>
-        <button id="loginSubmitO" ng-hide="loginShowO" ng-click= "loginShowO= 'false'">SUBMIT</button>
-        <input id="loginNameO" type="text" placeholder="Enter Name" ng-model="binding.nameO" ng-hide="loginShowO">
+        <input id="loginNameX" type="text" placeholder="Enter Name" ng-model="binding.nameX" ng-hide="binding.loginShowX">
+        <button id="loginSubmitX" ng-hide="binding.loginShowX" ng-click= "binding.loginShowX= 'false'">SUBMIT</button>
+        <button id="loginSubmitO" ng-hide="binding.loginShowO" ng-click= "binding.loginShowO= 'false'">SUBMIT</button>
+        <input id="loginNameO" type="text" placeholder="Enter Name" ng-model="binding.nameO" ng-hide="binding.loginShowO">
       </div>
     </div>
 

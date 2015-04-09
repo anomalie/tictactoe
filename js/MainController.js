@@ -43,7 +43,6 @@
 		// CREATES GAME ON FIREBASE //
 			function createGame() {
 				self.game = $firebaseObject(ref);
-
 				self.game.board = [
 					{circle: ""},{circle: ""},{circle: ""},
 					{circle: ""},{circle: ""},{circle: ""},
