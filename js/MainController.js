@@ -3,10 +3,10 @@
 		.module('ttcApp',['firebase'])
 		.controller('mainController', mainController);
 
-	mainController.$inject = ['$scope','$firebaseObject','$firebaseArray'];
+	mainController.$inject = ['$scope','$firebaseObject'];
 
 				//SET CONTROLLER FUNCTION & VARIABLES//
-		function mainController($scope,$firebaseObject,$firebaseArray){
+		function mainController($scope,$firebaseObject){
 
 			var introSound = new Audio ("./audio/intro.mp3");
 			var submitSound = new Audio ("./audio/ttc_01.mp3");
@@ -21,33 +21,29 @@
 				"./audio/ttc_16.mp3","./audio/ttc_17.mp3","./audio/ttc_18.mp3",
 				"./audio/ttc_19.mp3"];
 			var ref= new Firebase("https://tictactoefbapp.firebaseio.com/");
+			var namesref = new Firebase("https://tictactoefbapp.firebaseio.com/binding");
+  		var binding =$firebaseObject(namesref);
+
+  		binding.$bindTo($scope, 'binding');
+
 			var self = this;
-			self.game = $firebaseObject(ref);
+				// self.game = $firebaseObject(ref);
 				this.createGame = createGame();
 				self.ref= ref;
 				self.playerMove = playerMove;
-				// self.game.currentPlayer = 1;
 				self.selectPlayer = selectTurn();
 				self.switchTurn = switchTurn;
 				self.getWinner= getWinner;
 				self.resetScore = resetScore;
 				self.newGame = newGame;
-				// self.Winner = 0;
-				// self.spaces = 9;
-				// self.playerOnePoints = 0;
-				// self.playerTwoPoints = 0;
-
-				// self.board = [
-				// {circle: null }, {circle: null }, {circle: null },
-				// {circle: null }, {circle: null }, {circle: null },
-				// {circle: null }, {circle: null }, {circle: null }
-				// ];
-
 				introSound.play();
+
+
 
 		// CREATES GAME ON FIREBASE //
 			function createGame() {
 				self.game = $firebaseObject(ref);
+
 				self.game.board = [
 					{circle: ""},{circle: ""},{circle: ""},
 					{circle: ""},{circle: ""},{circle: ""},
@@ -105,8 +101,7 @@
 			// PLAYER MOVE FUNCTION //
 			function playerMove(index) {
 
-				console.log(self.game.board[index]);
-				console.log(self.game.currentPlayer);
+
 			  if (self.game.board[index].circle === "") {
   				// RANDOM SOUNDS PLAYS DURING PLAYERMOVE //
   				var randomSound=Math.floor(Math.random()*sounds.length);
@@ -189,6 +184,8 @@
 				self.game.$save(self.game);
 			}
 		}
+
+
 })();
 
 
